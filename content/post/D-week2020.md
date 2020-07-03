@@ -1,6 +1,6 @@
 ---
 title: "note@mex@2020"
-draft: false
+draft: true
 author: "Cheney"
 hiddenFromHomePage: true
 ---
@@ -9,7 +9,7 @@ hiddenFromHomePage: true
 1. go macro   （服务并发模型？  负载均衡机制？ 熔断重试机制？  json rpc怎么转的pb   pdf）
    go micro  api网关 向后转发  是用的ui/bs阻塞模型  还是nginx 非阻塞模型 web 直接使用了  go自带的反向代理   httputil.NewSingleHostReverseProxy(rp).ServeHTTP(w, r) 反向代理怎么处理的？ 待研究 rpc/ api 使用了什么方式？
 2. k8s
-3. 分布式系统设计
+3. 分布式系统设计 CSP 各种理论模型 
 4. 区块链
 
 

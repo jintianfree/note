@@ -33,4 +33,6 @@ case $1 in
 "pub")
     sync_and_publish
 ;;
+*)
+    echo "Usage: " $0 "srv|sync|pub"
 esac
