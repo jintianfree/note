@@ -3,8 +3,8 @@ title: "Syntax Highlighting"
 date: 2011-08-30T16:01:23+08:00
 lastmod: 2018-11-05T16:01:23+08:00
 draft: false
-tags: ["preview", "Syntax Highlighting", "tag-5"]
-categories: ["Syntax Highlighting"]
+tags: ["demo"]
+categories: ["theme"]
 
 toc: false
 

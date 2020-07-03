@@ -3,9 +3,10 @@ title: "[English] Creating a New Theme"
 date: 2017-08-31T15:43:48+08:00
 lastmod: 2017-08-31T15:43:48+08:00
 draft: false
-tags: ["preview", "English", "tag-2"]
-categories: ["English"]
+tags: ["demo"]
+categories: ["theme"]
 author: "Michael Henderson"
+hiddenFromHomePage: true
 
 autoCollapseToc: true
 contentCopyright: '<a href="https://github.com/gohugoio/hugoBasicExample" rel="noopener" target="_blank">See origin</a>'
