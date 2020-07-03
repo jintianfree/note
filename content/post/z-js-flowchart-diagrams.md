@@ -5,6 +5,7 @@ draft: false
 
 tags: ["demo"]
 categories: ["theme"]
+hiddenFromHomePage: true
 
 flowchartDiagrams:
   enable: true
