@@ -20,7 +20,13 @@ But you can see it in archives, rss or other pages.
 技术  
 感悟
 
+note
+小笔记
+draft:true
 
-D-系列  一些不发布的笔记   draft:true
-Y-系列  之前的一些数据备份 draft:true
-Y-系列  hugo皮肤自带 暂时没删掉
+post
+发布的文件 draft:false
+
+zip
+之前的一些数据备份 draft:true
+hugo皮肤自带 暂时没删掉
