@@ -13,11 +13,11 @@ autoCollapseToc: true
 
 ---
 
-# 长链接
+## 长链接
 
 我们知道tcp层级有长连接短连接；长连接，是指建立连接后保持，不断开。http长连接基于tcp层级长连接，基于一次tcp长量级，传输多次请求。并不是tcp支持长连接了，上层的应用协议就支持长量级，上层协议必须自己能区分出每次请求，知道一次交互什么时间结束，否则上层协议是无法使用长连接的。因此在早起的http版本，是不支持长链接的，http1.1开始支持并默认使用。
 
-# http各版本区别
+## http各版本区别
 ### HTTP 1.0
 1.0规定浏览器与服务器只保持短暂的连接，浏览器的每次请求都需要与服务器建立一个TCP连接，服务器完成请求处理后立即断开TCP连接，服务器不跟踪每个客户也不记录过去的请求。HTTP1.0是没有host域的，HTTP1.1才支持这个参数。
 
@@ -33,7 +33,7 @@ HTTP 1.1支持只发送header信息(不带任何body信息)，如果服务器认
 ![HTTP2.0多路复用图](../../img/http2.0_multiio.png)
 
 
-# Go http库
+## Go http库
 go自带的http client库支持长链接，默认会使用。库中会自动缓存链接，每次发请求找一个存在的链接使用，使用者无需关心。<br>
 **使用：**
 https://nanxiao.me/en/a-brief-intro-of-tcp-keep-alive-in-gos-http-implementation/
