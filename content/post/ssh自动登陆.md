@@ -1,5 +1,5 @@
 ---
-title: "ssh自动登陆"
+title: "Linux ssh自动登陆"
 date: 2020-07-03T19:36:06+08:00
 draft: false
 tags: ["ssh","linux","Verification Code"]
@@ -7,6 +7,9 @@ categories: ["总结", "技术"]
 
 weight: 10
 autoCollapseToc: true
+contentCopyright: GPL
+mathjax: true
+
 ---
 
 #### 自动填写密码和google验证码的脚本复制可用
@@ -23,7 +26,6 @@ trap { # trap sigwinch and pass it to the child we spawned
 set cmd [lindex $argv 0]
 set password [lindex $argv 1]
 set verification_code [lindex $argv 2]
-
 
 set pos [string first "scp" $cmd]
 
@@ -99,5 +101,3 @@ code=`python google-authenticator.py ***`
 echo $passwd
 ${filepath}/auto-ssh-or-scp.expect "ssh ${host}" $passwd $code
 ```
-
-#### 
