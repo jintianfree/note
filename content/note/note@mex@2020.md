@@ -12,6 +12,13 @@ hiddenFromHomePage: true
 3. 分布式系统设计 CSP 各种理论模型 
 4. 区块链
 
+https://wudaijun.com/2018/01/go-scheduler/
+https://tiancaiamao.gitbooks.io/go-internals/content/zh/05.2.html
+https://segmentfault.com/a/1190000018150987
+https://www.flysnow.org/2017/04/11/go-in-action-go-goroutine.html
+https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-goroutine/
+
+
 ## 工作TODO
 - [x] 积分独立
 - [x] 游戏升级积分
@@ -20,7 +27,11 @@ hiddenFromHomePage: true
 - [ ] APP交叉推广 时间地域过滤
 
 # 日常
+微信： wxleo888666 密码 Admin1234
 
+## TODO: 
+  micro project  api srv demo note
+  
 ## 2020-10-30
 游戏 上架  
 平台 下周

@@ -12,6 +12,12 @@ mathjax: true
 autoCollapseToc: true
 ---
 
+### mongo 环境搭建
+```
+docker run --restart=always -p 27017:27017 -v /data/mongo/db/:/data/db -d  --name mongo mongo
+docker run --restart=always --link mongo:mongo -e ME_CONFIG_BASICAUTH_USERNAME=mongolog -e ME_CONFIG_BASICAUTH_PASSWORD=MonGoLog@321 -p 8081:8081 -d --name mongo-express mongo-express
+```
+通过将数据目录挂载到宿主机，docker容器重启，重新创建都不会影响数据
 
 ### 基础 
 ```
