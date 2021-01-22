@@ -16,15 +16,74 @@ mysqldump　-h host -u root -p -d　数据库名　[表名]
 ### 导出数据不导出结构 -t
 mysqldump　-h host -u root -p -t　数据库名　[表名]
 
+### mysql分区
+``` sql
+CREATE TABLE `wm_detail_hour_partition` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cluster` int(11) NOT NULL DEFAULT '0',
+  `gid` int(11) NOT NULL DEFAULT '0',
+  `date` int(11) NOT NULL DEFAULT '0',
+  `hour` int(11) NOT NULL DEFAULT '0',
+  `adv` int(11) NOT NULL DEFAULT '0',
+  `sad` char(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `ad` int(11) NOT NULL DEFAULT '0',
+  `pkg` char(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `cn` char(4) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `pl` int(11) NOT NULL DEFAULT '0',
+  `mid` int(11) NOT NULL DEFAULT '0',
+  `mmid` int(11) NOT NULL DEFAULT '0',
+  `siteid` char(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `msite` char(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `hsid` int(11) NOT NULL DEFAULT '0',
+  `role` int(11) NOT NULL DEFAULT '0',
+  `bt` int(11) NOT NULL DEFAULT '0',
+  `name` char(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `pm` int(11) NOT NULL DEFAULT '0',
+  `am` int(11) NOT NULL DEFAULT '0',
+  `sales` int(11) NOT NULL DEFAULT '0',
+  `cy` char(8) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'USD',
+  `click` int(11) NOT NULL DEFAULT '0',
+  `install` int(11) NOT NULL DEFAULT '0',
+  `install_pub` int(11) NOT NULL DEFAULT '0',
+  `action` int(11) NOT NULL DEFAULT '0',
+  `action_pub` int(11) NOT NULL DEFAULT '0',
+  `pin` bigint(20) NOT NULL DEFAULT '0',
+  `pout` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`, `date`),
+  KEY `index_gid` (`gid`),
+  KEY `index_hour` (`hour`),
+  KEY `index_adv` (`adv`),
+  KEY `index_ad` (`ad`),
+  KEY `index_mid` (`mid`),
+  KEY `index_pkg` (`pkg`),
+  KEY `index_sad` (`sad`)
+) PARTITION BY HASH (date)  PARTITIONS 356;
+```
+分区键只能是主键，如果想使用date分区，可以使用(id, date)做主键，然后用date进行分区，一天一个分区或者一月一个分区。mysql一个表最多使用1024个分区。 
+上面使用场景按日期分区后，真香，之前几分钟的聚合查询，降到了十几秒。
+常见使用场景：
+（1）当数据量很大(过T)时，肯定不能把数据载入到内存中，这样查询一个或一定范围的item是很耗时。另外一般这情况下，历史数据或不常访问的数据占很大部分，最新或热点数据占的比例不是很大。这时可以根据有些条件进行表分区。
+（2）分区表的更易管理，比如删除过去某一时间的历史数据，直接执行truncate，或者直接drop整个分区，这比detele删除效率更高；
+（3）当数据量很大，或者将来很大的，但单块磁盘的容量不够，或者想提升IO效率的时候，可以把没分区中的子分区挂载到不同的磁盘上。
+（4）使用分区表可避免某些特殊的瓶颈，例如Innodb的单个索引的互斥访问。
+（5）在某些场景下，单个分区表的备份很恢复会更有效率。
 
 
+### mysql修改表名
+表在没有使用的情况下,修改很快,5000w数据的表：
+``` sql
+select * from information_schema.processlist;
+alter table wm_detail_hour_partition  rename to wm_detail_hour;
+Query OK, 0 rows affected (1.22 sec)
+```
 
 ### join另一个表数据进行更新
+``` sql
 mysql update join
 update aff_postback 
     left join aff_advertiser on aff_postback.advertiser = aff_advertiser.advertiser 
     set aff_postback.sales = aff_advertiser.sales;  
-
+```
 ### mysql查看正在执行的sql语句
 有2个方法：
 1、使用processlist，但是有个弊端，就是只能查看正在执行的sql语句，对应历史记录，查看不到。好处是不用设置，不会保存。
